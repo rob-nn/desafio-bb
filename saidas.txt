@@ -1,12 +1,94 @@
-SAÍDAS DE ACORDO COM O PEDIDO NO DOCUMENTO DO DESAFIO
+SAÍDAS DE ACORDO COM O QUE FOI PEDIDO NO DOCUMENTO QUE DESCREVE O DESAFIO
+
+Para fazer este desafio foi utilizado o conjunto de ferramentas disponibilizados pelo pacote Anaconda 3. Todo o software foi escrito no formato notebook da ferramenta jupyter notebook.
+A linguagem utilizada foi Python 3.
+A biblioteca de Machine Learning utilizada foi a Scikit-Learn.
+Software disponibilizado no git hub no arquivo Desafio-BB.ipynb. Pode ser aberto com o comando jupyter notebook.
+Todo os artefatos produzidos estão disponíveis no github: https://github.com/rob-nn/desafio-bb
+
 
 
 # EXPLICAR AS VARIÁVEIS QUE FORAM EXPLORADAS E OS MOTIVOS;
+	Foram exploradas todas as variáveis. Como estratégia para optou-se por usar força bruta na hiperparametrização e se experimentar vários algoritmos diferentes, ao invés de se fazer um estudo minucioso das variáveis. O motivo foi o pouco tempo alocado para realizar a tarefa.
+
 # CASO TENHA SIDO NECESSÁRIO NOVAS VARIÁVEIS, EXPLICAR O MOTIVO DA CRIAÇÃO;
+	Não se criou novas variáveis, mas em compensação todos as colunas do dataset que eram de tipo não numérico foram mapeadas para números inteiros e depois escaladas usando-se o método standardization.
+
 # EXPLICAR O PROCESSO DE PREPARAÇÃO;
+	Utilizou-se da biblioteca pandas do python para fazer a leitura inicial dos dados;
+	Linhas que apresentaram algum tipo de problema de conversão de tipos foram eliminadas;
+	Todas as colunas do arquivo que possuíam o tipo string, foram remapeadas para valores inteiros;
+	Os dados foram separados num Array contendo as variáveis e um vetor contendo os rótulos (classificador <=50k ou >50k);
+	Os dados foram separados de forma aleatória num grupo de 80% para treinamento e outro de 20% para testes;
+	Todas as matrizes resultantes foram escaladas usando o método standardization.
+
 # DETALHAR SE HOUVE ALGUM PROCESSO QUE DEVE SER CONSIDERADO TRANSFORMAÇÃO DE RECURSOS CONTÍNUOS ENVIESADOS E O PORQUÊ;
+	Não entendi
+
 # EXPLICAR QUAL FOI O PROCESSO UTILIZADO PARA NORMALIZAÇÃO DOS DADOS;
+	O processo equivalente a normalização de dados utilizado foi escalar os valores das matrizes usando o standardization. Basicamente cada valor da matriz é escalado pegando-se o valor do item da matriz subtraindo-o da média (da coluna) e dividindo-se o resultado pelo desvio padrão (da coluna). Utilizou-se as ferramentas do scikit-learn para se fazer isso.
+
 # DETALHAR QUAL FOI O MODELO UTILIZADO PARA DESEMPENHO E PREDIÇÃO DOS DADOS;
+	Utilizou-se a acurácia e o Log Loss para se determinar o desempenho das possíveis soluções.
+	Para se treinar o modelo se utilizou o primeiro grupo de dados. Para se testar o modelo (fase de teste de predição) utilizou-se o grupo de dados separado para testes. A acurácia e o Log Loss foram calculados em cima da predição dos dados separados para teste.
+
 # SE CHEGOU A UTILIZAR MODELOS DE APRENDIZAGEM SUPERVISIONADOS, EXPLIQUE QUAIS;
+	Foram utilizados vários algoritmos de aprendizagem supervisionados.
+Primeiramente foram feitas várias tentativas usando-se SVM e MLP, mudou-se várias vezes os parâmetros dos algoritmos. Melhor resultado para SVM foi:
+Accuracy: 0.84
+Log Loss: 5.40
+Já para MLP foi:
+Accuracy: 0.84
+Log Loss: 5.58
+	Depois foi feito um pequeno programa que rodou vários algoritmos de uma vez sem se se modificar muito os parâmetros dos algoritmos
+Resultados de cada um dos algoritmos abaixo:
+	Nearest Neighboss
+    --- 0.017520904541015625 Segundos ---
+    Accuracy: 0.79
+    Log Loss: 7.18
+Linear SVM
+    --- 0.19573736190795898 Segundos ---
+    Accuracy: 0.82
+    Log Loss: 6.12
+RBF SVM
+    --- 0.7933015823364258 Segundos ---
+    Accuracy: 0.77
+    Log Loss: 8.11
+Decision Tree
+    --- 0.003942966461181641 Segundos ---
+    Accuracy: 0.83
+    Log Loss: 5.71
+Random Forest
+    --- 0.013039112091064453 Segundos ---
+    Accuracy: 0.83
+    Log Loss: 5.80
+Neural Net
+    --- 0.5596568584442139 Segundos ---
+    Accuracy: 0.84
+    Log Loss: 5.62
+AdaBoost
+    --- 0.11076831817626953 Segundos ---
+    Accuracy: 0.84
+    Log Loss: 5.58
+Naive Bayes
+    --- 0.0013234615325927734 Segundos ---
+    Accuracy: 0.82
+    Log Loss: 6.15
+QDA
+    --- 0.0017476081848144531 Segundos ---
+    Accuracy: 0.82
+    Log Loss: 6.12
+Como neste teste o AdaBoost teve um melhor resultado, investiu-se um pouco mais neste algoritmo. Novas parametrizações foram testadas e este novo score foi obtido:
+Accuracy: 0.85
+Log Loss: 5.18
+
+
 # DETALHAR O QUE FOI UTILIZADO NO TREINO E DE EVOLUÇÃO;
 APRESENTAR A ACURACIDADE DO MODELO E A REVALIDAÇÃO DO MODELO COM LOG LOSS.
+Tendo-se por base todos os modelos criados e citados anteriormente a melhor performance foi do AdaBoost com a maior acurácia e menor Log Loss:
+Accuracy: 0.85
+Log Loss: 5.18
+Os parâmetros que obteram esta performance foram:
+{'adaboostclassifier__algorithm': 'SAMME.R', 'adaboostclassifier__learning_rate': 1.7, 'adaboostclassifier__n_estimators': 300}
+Todo o código está disponível no github em https://github.com/rob-nn/desafio-bb arquivo:
+
